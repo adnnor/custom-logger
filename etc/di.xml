@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="ad" xsi:type="object">Ad\Logger\Console\Log</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Ad\Logger\Logger\Simple\Handler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/single/log.log</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Ad\Logger\Simple" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">Ad\Logger\Logger\Simple\Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Ad\Logger\Model\Logger">
+        <arguments>
+            <argument name="logger" xsi:type="object">Ad\Logger\Simple</argument>
+        </arguments>
+    </type>
+
+
+
+
+
+
+
+
+
+    <!-- for datewise logger -->
+    <virtualType name="Ad\Logger\Datewise\Logger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="error" xsi:type="object">Ad\Logger\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Ad\Logger\Model\Logger\Datewise">
+        <arguments>
+            <argument name="logger" xsi:type="object">Ad\Logger\Datewise\Logger</argument>
+        </arguments>
+    </type>
+
+
+
+
+
+
+
+
+
+
+</config>
+
+

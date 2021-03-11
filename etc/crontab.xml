@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+
+<config>
+    <group id="webworks_coupon">
+        <job name="revert_coupons" instance="<classpath>" method="<method>">
+            <schedule>* * * * *</schedule>
+        </job>
+    </group>
+</config>
